@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : BasicMovement
+public class PlayerMovement : BasicMovement
 {
     public KeyCode up;
     public KeyCode down;
     public KeyCode left;
     public KeyCode right;
+    private void Awake()
+    {
+        moveTime = 0.2f;
+    }
     public override Vector3Int choose_move()
     {
         if (Input.GetKey(right) & can_move(Vector3Int.right))
