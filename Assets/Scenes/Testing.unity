@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 493101773}
   - component: {fileID: 493101772}
   - component: {fileID: 493101771}
+  - component: {fileID: 493101774}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -164,7 +165,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -194,6 +195,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &493101774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493101770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 448d2ed3a3aeb5b4bb54a9288553609d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1057072748}
 --- !u!1 &972281162
 GameObject:
   m_ObjectHideFlags: 0
@@ -248,7 +262,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 99eaf003d3d3ac085b983530153a455e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8f24b008c935f8b4cb6d560192da96c0, type: 3}
   m_Color: {r: 0.7264151, g: 0.7264151, b: 0.7264151, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -285,6 +299,8 @@ GameObject:
   - component: {fileID: 1057072750}
   - component: {fileID: 1057072752}
   - component: {fileID: 1057072749}
+  - component: {fileID: 1057072754}
+  - component: {fileID: 1057072753}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -301,20 +317,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1057072748}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e5cc3bbdea0dde49a7cc342d17d7283, type: 3}
+  m_Script: {fileID: 11500000, guid: 434fdcd80ab523c45a4cdd6137c1ac54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelMask:
-    serializedVersion: 2
-    m_Bits: 0
-  isMoving: 0
-  moveTime: 1
-  inverseMoveTime: 0
-  last_move: {x: 0, y: 0, z: 0}
-  up: 0
-  down: 0
-  left: 0
-  right: 0
 --- !u!212 &1057072750
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -352,12 +357,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 99eaf003d3d3ac085b983530153a455e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d4e841b98f0e709479bd700bcc766d8d, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 5.12, y: 5.12}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -372,7 +377,7 @@ Transform:
   m_GameObject: {fileID: 1057072748}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -398,3 +403,45 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1057072753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057072748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc898ecc816508d43ac3db6cc27ea6b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  up: 0
+  down: 0
+  left: 0
+  right: 0
+  damage: 1
+  attackPrefab: {fileID: 3687879827831001695, guid: 866eca37ed7146b4f83a43e788fef2e4,
+    type: 3}
+--- !u!114 &1057072754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057072748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e5cc3bbdea0dde49a7cc342d17d7283, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelMask:
+    serializedVersion: 2
+    m_Bits: 0
+  isMoving: 0
+  moveTime: 1
+  inverseMoveTime: 0
+  last_move: {x: 0, y: 0, z: 0}
+  up: 0
+  down: 0
+  left: 0
+  right: 0

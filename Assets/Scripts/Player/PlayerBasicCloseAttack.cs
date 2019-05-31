@@ -13,6 +13,21 @@ public class PlayerBasicCloseAttack : MonoBehaviour
     public int damage = 1;
     public BasicCloseAttack attackPrefab;
 
+    private void Awake() {
+        up = KeyCode.UpArrow;
+        down = KeyCode.DownArrow;
+        left = KeyCode.LeftArrow;
+        right = KeyCode.RightArrow;
+    }
+
+    private void Start() {
+        
+    }
+
+    private void Update() {
+        
+    }
+
     public void attackDirection(Vector3Int direction)
     {
         BasicCloseAttack ex = Instantiate(attackPrefab, transform.position + direction, Quaternion.identity);
