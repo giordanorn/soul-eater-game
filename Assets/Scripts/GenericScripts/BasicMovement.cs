@@ -18,6 +18,7 @@ public abstract class BasicMovement : MonoBehaviour
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        rb2d.gravityScale = 0.0f;
         inverseMoveTime = 1f / moveTime;
     }
 

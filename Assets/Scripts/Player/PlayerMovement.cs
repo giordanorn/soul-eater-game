@@ -10,6 +10,10 @@ public class PlayerMovement : BasicMovement
     public KeyCode right;
     private void Awake()
     {
+        up = KeyCode.W;
+        down = KeyCode.S;
+        left = KeyCode.A;
+        right = KeyCode.D;
         moveTime = 0.2f;
     }
     public override Vector3Int choose_move()
