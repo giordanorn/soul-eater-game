@@ -2,9 +2,9 @@
 
 
 [RequireComponent(typeof(Creature))]
-public class DamageCooldown : MonoBehaviour
+public class ImmunityAfterTakeDamage : MonoBehaviour
 {
-    public float immunityCooldown;
+    public float immunitySeconds;
     private float currentCooldown;
 
     void Start()
@@ -34,6 +34,6 @@ public class DamageCooldown : MonoBehaviour
 
     public void ResetCooldown()
     {
-        currentCooldown = immunityCooldown;
+        currentCooldown = immunitySeconds;
     }
 }

@@ -3,12 +3,12 @@
 public class Creature : MonoBehaviour
 {
     private HealthReserve healthReserve;
-    private DamageCooldown damageCooldown;
+    private ImmunityAfterTakeDamage immunity;
 
     void Start()
     {
         healthReserve = GetComponent<HealthReserve>();
-        damageCooldown = GetComponent<DamageCooldown>();
+        immunity = GetComponent<ImmunityAfterTakeDamage>();
     }
 
     void  Update()
@@ -29,7 +29,7 @@ public class Creature : MonoBehaviour
             }
             if (HasDamageCooldown())
             {
-                damageCooldown.ResetCooldown();
+                immunity.ResetCooldown();
             }
         }
     }
@@ -47,7 +47,7 @@ public class Creature : MonoBehaviour
         }
         else if (HasDamageCooldown())
         {
-            return damageCooldown.InCooldown();
+            return immunity.InCooldown();
         }
         else
         {
@@ -62,7 +62,7 @@ public class Creature : MonoBehaviour
 
     private bool HasDamageCooldown()
     {
-        return damageCooldown != null;
+        return immunity != null;
     }
 
     private void Die()
