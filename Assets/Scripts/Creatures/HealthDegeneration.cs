@@ -14,7 +14,7 @@ public class HealthDegeneration : MonoBehaviour
         if (degeneratePerSecond < 0.0f)
         {
             degeneratePerSecond = 0.0f;
-            Debug.LogWarning("You shoudn't set a negative value to the variable \"Degenerate Per Second\", if you mind to, use HealthRegeneration instead. The value was set to zero.");
+            Debug.LogWarning("You shoudn't set a negative value to the variable \"Degenerate Per Second\", if you mind to, use HealthRegeneration instead. The value has been changed to zero.");
         }
     }
 
