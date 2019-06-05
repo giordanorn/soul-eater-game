@@ -15,12 +15,26 @@ public class HealthReserve : MonoBehaviour
 
     public void Increase(float healthToIncrease)
     {
-        CurrentHealth = Math.Min(CurrentHealth + healthToIncrease, maximumHealth);
+        if (healthToIncrease < 0.0f)
+        {
+            Debug.LogWarning("Can't increase health in a negative value, if you mind to, use method Decrease instead. Exiting method Increase.");
+        }
+        else
+        {
+            CurrentHealth = Math.Min(CurrentHealth + healthToIncrease, maximumHealth);
+        }
     }
     
     public void Decrease(float healthToDecrease)
     {
-        CurrentHealth = Math.Max(CurrentHealth - healthToDecrease, 0.0f);
+        if (healthToDecrease < 0.0f)
+        {
+            Debug.LogWarning("Can't decrease health in a negative value, if you mind to, use method Increase instead. Exiting method Decrease.");
+        }
+        else
+        {
+            CurrentHealth = Math.Max(CurrentHealth - healthToDecrease, 0.0f);
+        }
     }
 
     public bool IsEmpty()
