@@ -8,8 +8,13 @@ public class PlayerMovement : MonoBehaviour
     public KeyCode down = KeyCode.S;
     public KeyCode left = KeyCode.A;
     public KeyCode right = KeyCode.D;
-    public float speed = 0.2f;
+    public float speed = 3f;
     void FixedUpdate()
+    {
+        Move();
+    }
+
+    void Move()
     {
         float Hmove = 0.0f;
         float Vmove = 0.0f;
