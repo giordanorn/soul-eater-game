@@ -117,4 +117,4 @@ MonoBehaviour:
   levelMask:
     serializedVersion: 2
     m_Bits: 0
-  moveTime: 1
+  moveTime: 0.5
