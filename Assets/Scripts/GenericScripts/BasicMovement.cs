@@ -1,108 +1,122 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class BasicMovement : MonoBehaviour
 {
+    /***** Unity Parameters *****/
+
+    ///<summary>Layer mask used to detect collision with possible obstacles.</summary>
     public LayerMask levelMask;
 
-    protected Rigidbody2D rb2d;
-
-    protected bool isMoving = false;
+    /// <summary>Time determined to perform a full movement.</summary>
     public float moveTime = 1f;
-    private float inverseMoveTime = 1f;
-    public Vector3Int last_move = Vector3Int.zero;
-    public Vector3Int inverse_last_move = Vector3Int.zero;
-    protected Vector3Int[] moves = { Vector3Int.left, Vector3Int.right, Vector3Int.down, Vector3Int.up };
-    protected Vector3Int[] inverseMoves = { Vector3Int.right, Vector3Int.left, Vector3Int.up, Vector3Int.down };
-    protected int[] index = new int[4];
+
+
+    /***** Unity Components *****/
+
+    /// <summary>The rigidbody associated with this entity.</summary>
+    /// <value>The rigidbody.</value>
+    private Rigidbody2D rb;
+
+
+    /***** Properties *****/
+
+    /// <summary>The last move performed.</summary>
+    /// <value>The last move.</value>
+    public Vector3Int LastMove { get; private set; } = Vector3Int.zero;
+
+    /// <summary>Whether this entity or not.</summary>
+    /// <value>true if moving, else false.</value>
+    public bool IsMoving { get; private set; } = false;
+
+    // Floating-point calculation optimization, not sure if necessary.
+    /// <summary>Gets the inverse move time.</summary>
+    /// <value>The inverse move time.</value>
+    private float InverseMoveTime => 1f / moveTime;
+
+
+    /**** Private Fields ****/
+
+    /// <summary>The allowed moves for this entity.</summary>
+    private readonly Vector3Int[] moves = { Vector3Int.left, Vector3Int.right, Vector3Int.down, Vector3Int.up };
+
+    /***** Unity Methods *****/
 
     void Start()
     {
-        rb2d = GetComponent<Rigidbody2D>();
-        rb2d.gravityScale = 0.0f;
-        inverseMoveTime = 1f / moveTime;
+        rb = GetComponent<Rigidbody2D>();
+        rb.gravityScale = 0.0f;
     }
 
     void FixedUpdate()
     {
-        if (!isMoving)
+        if (!IsMoving)
         {
-            Vector3Int direction = choose_move();
-            last_move = direction;
-            for (int i = 0; i < moves.Length; ++i)
-            {
-                if (last_move == moves[i])
-                {
-                    inverse_last_move = inverseMoves[i];
-                    break;
-                }
-            }
-            StartCoroutine(SmoothMovement((transform.position + direction).Floor()));
+            Vector3Int direction = ChooseMove();
+            LastMove = direction;
+
+            StartCoroutine(SmoothMovement(Vector3Int.FloorToInt(transform.position + direction)));
         }
     }
 
-    public abstract Vector3Int choose_move();
 
-    // Taken from Unity Tutorials
-    protected IEnumerator SmoothMovement(Vector3 end, Vector3 temp_pos = default(Vector3))
+    /***** Public methods *****/
+
+    /// <summary>Chooses the move to be performed.</summary>
+    /// <returns>The chosen move.</returns>
+    public abstract Vector3Int ChooseMove();
+
+    /// <summary>Get all the moves that can be performed by this entity.</summary>
+    /// <returns>The valid moves.</returns>
+    public Vector3Int[] GetValidMoves()
     {
-        if (end == null)
-        {
-            Debug.Log(end);
-            Debug.Log(temp_pos);
-        }
-        if (temp_pos == default(Vector3))
-        {
-            temp_pos = transform.position;
-        }
+        return moves.Where(m => CanMove(m)).ToArray();
+    }
+
+    /// <summary>Checks whether this entity can move along <paramref name="direction"/>.</summary>
+    /// <returns><c>true</c>, if it can move, <c>false</c> otherwise.</returns>
+    /// <param name="direction">The direction to move.</param>
+    public bool CanMove(Vector3 direction)
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, 0.51f, levelMask);
+        return hit.collider == null;
+    }
+
+
+    /***** Private Methods *****/
+
+    /// <summary>
+    /// Coroutine to execute a smooth movement from current position to <paramref name="end"/>.
+    /// </summary>
+    /// <param name="end">The endpoint.</param>
+    private IEnumerator SmoothMovement(Vector3 end)
+    {
+        Vector3 currentPosition = transform.position;
+
         //Calculate the remaining distance to move based on the square magnitude of the difference between current position and end parameter. 
         //Square magnitude is used instead of magnitude because it's computationally cheaper.
-        float sqrRemainingDistance = (temp_pos - end).sqrMagnitude;
-        isMoving = true;
+        float sqrRemainingDistance = (currentPosition - end).sqrMagnitude;
+
+        IsMoving = true;
+
         //While that distance is greater than a very small amount (Epsilon, almost zero):
         while (sqrRemainingDistance > float.Epsilon)
         {
             //Find a new position proportionally closer to the end, based on the moveTime
-            Vector3 newPosition = Vector3.MoveTowards(rb2d.position, end, inverseMoveTime * Time.fixedDeltaTime);
+            Vector3 newPosition = Vector3.MoveTowards(rb.position, end, InverseMoveTime * Time.fixedDeltaTime);
+
             //Call MovePosition on attached Rigidbody2D and move it to the calculated position.
-            rb2d.MovePosition(newPosition);
+            rb.MovePosition(newPosition);
+
             //Recalculate the remaining distance after moving.
             sqrRemainingDistance = (transform.position - end).sqrMagnitude;
 
             //Return and loop until sqrRemainingDistance is close enough to zero to end the function
             yield return null;
         }
-        isMoving = false;
-    }
 
-    public Vector3Int[] getValidMoves()
-    {
-        int size = 0;
-        for (int i = 0; i < moves.Length; i++)
-        {
-            if (can_move(moves[i]))
-            {
-                index[size] = i;
-                ++size;
-            }
-        }
-        Vector3Int[] valid = new Vector3Int[size];
-        for (int i = 0; i < size; i++)
-        {
-            valid[i] = moves[index[i]];
-        }
-        return valid;
-    }
-
-    public bool can_move(Vector3 direction)
-    {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, 0.51f, levelMask);
-        if (hit.collider == null)
-        {
-            return true;
-        }
-        return false;
+        IsMoving = false;
     }
 }

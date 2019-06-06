@@ -118,5 +118,3 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   moveTime: 1
-  last_move: {x: 0, y: 0, z: 0}
-  inverse_last_move: {x: 0, y: 0, z: 0}
