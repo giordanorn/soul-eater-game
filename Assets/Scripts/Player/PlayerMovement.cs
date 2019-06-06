@@ -2,38 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : BasicMovement
+public class PlayerMovement : MonoBehaviour
 {
-    public KeyCode up;
-    public KeyCode down;
-    public KeyCode left;
-    public KeyCode right;
-    private void Awake()
+    public KeyCode up = KeyCode.W;
+    public KeyCode down = KeyCode.S;
+    public KeyCode left = KeyCode.A;
+    public KeyCode right = KeyCode.D;
+    public float speed = 0.2f;
+    void FixedUpdate()
     {
-        up = KeyCode.W;
-        down = KeyCode.S;
-        left = KeyCode.A;
-        right = KeyCode.D;
-        moveTime = 0.2f;
-    }
-    public override Vector3Int choose_move()
-    {
-        if (Input.GetKey(right) & can_move(Vector3Int.right))
+        float Hmove = 0.0f;
+        float Vmove = 0.0f;
+        if (Input.GetKey(right))
         {
-            return Vector3Int.right;
+            Hmove += 1;
         }
-        if (Input.GetKey(left) & can_move(Vector3Int.left))
+        if (Input.GetKey(left))
         {
-            return Vector3Int.left;
+            Hmove += -1;
         }
-        if (Input.GetKey(up) & can_move(Vector3Int.up))
+        if (Input.GetKey(up))
         {
-            return Vector3Int.up;
+            Vmove += 1;
         }
-        if (Input.GetKey(down) & can_move(Vector3Int.down))
+        if (Input.GetKey(down))
         {
-            return Vector3Int.down;
+            Vmove += -1;
         }
-        return Vector3Int.zero;
+        transform.position += new Vector3(Hmove * speed, Vmove * speed, 0) * Time.deltaTime;
     }
 }
