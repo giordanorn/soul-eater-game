@@ -3,7 +3,7 @@ using UnityEngine;
 public class RestoreHealth : Effect
 {
     public float value = 10;
-    public override void Start(Collector collector)
+    public override void Do(Collector collector)
     {
         if (collector.IsCreature())
         {

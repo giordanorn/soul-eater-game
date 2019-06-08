@@ -2,5 +2,5 @@ using UnityEngine;
 
 public abstract class Effect: MonoBehaviour
 {
-    public abstract void Start(Collector collector);
+    public abstract void Do(Collector collector);
 }

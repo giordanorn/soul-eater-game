@@ -20,7 +20,7 @@ public class Collectible : MonoBehaviour
         {
             foreach (Effect effect in effects)
             {
-                effect.Start(collector);
+                effect.Do(collector);
             }
             Destroy(gameObject);
         }
