@@ -1,36 +1,48 @@
 using UnityEngine;
 
-public class PlayerMovement : BasicMovement
+[RequireComponent(typeof(Transform))]
+public class PlayerMovement : MonoBehaviour
 {
+    /***** Unity Parameters *****/
+
+    /// <summary>The Key that move the GameObject upwards.</summary>
     public KeyCode up = KeyCode.W;
+    /// <summary>The Key that move the GameObject downward.</summary>
     public KeyCode down = KeyCode.S;
+    /// <summary>The Key that move the GameObject to left.</summary>
     public KeyCode left = KeyCode.A;
+    /// <summary>The Key that move the GameObject to right.</summary>
     public KeyCode right = KeyCode.D;
+    /// <summary>The speed that the GameObject moves.</summary>
+    public float speed = 3f;
 
-    /// <summary>Determines the move according to player input.</summary>
-    /// <returns>The determined move.</returns>
-    public override Vector3Int ChooseMove()
+    /***** Unity Methods *****/
+    void FixedUpdate()
     {
-        if (Input.GetKey(right) & CanMove(Vector3Int.right))
-        {
-            return Vector3Int.right;
-        }
+        Move();
+    }
 
-        if (Input.GetKey(left) & CanMove(Vector3Int.left))
+    /// <summary>Get the Keys pressed and move the GameObject</summary>
+    void Move()
+    {
+        float Hmove = 0.0f;
+        float Vmove = 0.0f;
+        if (Input.GetKey(right))
         {
-            return Vector3Int.left;
+            Hmove += 1;
         }
-
-        if (Input.GetKey(up) & CanMove(Vector3Int.up))
+        if (Input.GetKey(left))
         {
-            return Vector3Int.up;
+            Hmove += -1;
         }
-
-        if (Input.GetKey(down) & CanMove(Vector3Int.down))
+        if (Input.GetKey(up))
         {
-            return Vector3Int.down;
+            Vmove += 1;
         }
-
-        return Vector3Int.zero;
+        if (Input.GetKey(down))
+        {
+            Vmove += -1;
+        }
+        transform.position += new Vector3(Hmove * speed, Vmove * speed, 0) * Time.deltaTime;
     }
 }
