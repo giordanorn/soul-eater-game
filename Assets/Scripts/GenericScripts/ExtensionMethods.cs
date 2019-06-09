@@ -1,6 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 static class ExtensionMethods
 {
     /// <summary>
@@ -16,6 +16,7 @@ static class ExtensionMethods
         {
             multiplier *= 10f;
         }
+
         return new Vector3(
             Mathf.Round(vector3.x * multiplier) / multiplier,
             Mathf.Round(vector3.y * multiplier) / multiplier,
