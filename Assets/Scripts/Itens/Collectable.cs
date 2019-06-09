@@ -1,17 +1,17 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// Behavior to enable the collection of this GameObject as a Collectible by a Collector.
+/// Behavior to enable the collection of this GameObject as a Collectable by a Collector.
 /// </summary>
 [RequireComponent(typeof(Collider2D))]
-public class Collectible : MonoBehaviour
+public class Collectable : MonoBehaviour
 {
     /// <summary>
     /// The Collider2D that GameObject needs to know when has been collected by a Collector.
     /// </summary>
     private Collider2D coll2d;
     /// <summary>
-    /// The list of effects that this Collectible has.
+    /// The list of effects that this Collectable has.
     /// </summary>
     public Effect[] effects;
 
@@ -29,7 +29,7 @@ public class Collectible : MonoBehaviour
         {
             foreach (Effect effect in effects)
             {
-                effect.Do(collector);
+                effect.ApplyEffect(collector);
             }
             Destroy(gameObject);
         }
