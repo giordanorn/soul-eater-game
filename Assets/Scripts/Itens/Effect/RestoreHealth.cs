@@ -9,7 +9,7 @@ public class RestoreHealth : Effect
     /// The value of Health to be restored.
     /// </summary>
     public float value = 10;
-    public override void Do(Collector collector)
+    public override void ApplyEffect(Collector collector)
     {
         if (collector.IsCreature())
         {

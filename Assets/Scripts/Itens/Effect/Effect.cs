@@ -9,5 +9,5 @@ public abstract class Effect: MonoBehaviour
     /// Method to apply an effect on a Collector.
     /// </summary>
     /// <param name="collector">The Collector target of the effect.</param>
-    public abstract void Do(Collector collector);
+    public abstract void ApplyEffect(Collector collector);
 }
