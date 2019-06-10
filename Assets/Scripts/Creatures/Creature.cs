@@ -1,17 +1,30 @@
 ﻿using UnityEngine;
-
+using UnityEngine.Events;
 public class Creature : MonoBehaviour
 {
+    private UnityEvent beforeDie;
+
     private HealthReserve healthReserve;
+
     private ImmunityAfterTakeDamage immunity;
+
+    private void Awake()
+    {
+        if (beforeDie == null)
+        {
+            beforeDie = new UnityEvent();
+        }
+    }
 
     void Start()
     {
+
+
         healthReserve = GetComponent<HealthReserve>();
         immunity = GetComponent<ImmunityAfterTakeDamage>();
     }
 
-    void  Update()
+    void Update()
     {
         if (healthReserve.IsEmpty())
         {
@@ -33,12 +46,12 @@ public class Creature : MonoBehaviour
             }
         }
     }
-    
+
     public void Kill()
     {
         Die();
     }
-    
+
     private bool IsImmune()
     {
         if (!HasHealthReserve())
@@ -65,8 +78,14 @@ public class Creature : MonoBehaviour
         return immunity != null;
     }
 
+    public void addActionOnDeath(UnityAction action)
+    {
+        beforeDie.AddListener(action);
+    }
+
     private void Die()
     {
+        beforeDie.Invoke();
         gameObject.SetActive(false);
     }
 }
