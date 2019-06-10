@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// An Effect to restore a determined quantity of Health on a Creature.
 /// </summary>
-public class RestoreHealth : Effect
+public class Heal : Effect
 {
     /// <summary>
     /// The value of Health to be restored.
@@ -13,19 +13,19 @@ public class RestoreHealth : Effect
     {
         if (collector.IsCreature())
         {
-            HealthReserve healthReserve = collector.GetComponent<HealthReserve>();
-            if (healthReserve != null)
+            if (collector.HasHealthReserve())
             {
+                HealthReserve healthReserve = collector.GetComponent<HealthReserve>();
                 healthReserve.Increase(value);
             }
             else
             {
-                Debug.LogWarning("Cannot restore health. HealthReserve missing!");
+                Debug.LogWarning("Can't heal. HealthReserve is missing!");
             }
         }
         else
         {
-            Debug.LogWarning("Cannot restore health. Not a Creature!");
+            Debug.LogWarning("Can't heal. Not a Creature!");
         }
     }
 }

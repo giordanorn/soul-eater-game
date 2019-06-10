@@ -55,12 +55,12 @@ public class Creature : MonoBehaviour
         }
     }
 
-    private bool HasHealthReserve()
+    public bool HasHealthReserve()
     {
         return healthReserve != null;
     }
 
-    private bool HasDamageCooldown()
+    public bool HasDamageCooldown()
     {
         return immunity != null;
     }
