@@ -13,7 +13,8 @@ public class Heal : Effect
     {
         if (collector.IsCreature())
         {
-            if (collector.HasHealthReserve())
+            Creature creature = collector.GetComponent<Creature>();
+            if (creature.HasHealthReserve())
             {
                 HealthReserve healthReserve = collector.GetComponent<HealthReserve>();
                 healthReserve.Increase(value);
