@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public abstract class BasicMovement : MonoBehaviour
+public abstract class EnemyGridMovement : MonoBehaviour
 {
     /***** Unity Parameters *****/
 

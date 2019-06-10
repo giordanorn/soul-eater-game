@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyRandomMovement : BasicMovement
+public class EnemyRandomMovement : EnemyGridMovement
 {
     /// <summary>Selects a random move from the available moves.</summary>
     /// <returns>The selected move.</returns>
