@@ -4,20 +4,20 @@ using UnityEngine;
 [RequireComponent(typeof(Creature))]
 public class DropSoulOnDeath : MonoBehaviour
 {
-    public int value = 10;
+    public int healAmount = 10;
     public Collectable soulPrefab;
     private Creature creature;
 
     void Start()
     {
         creature = GetComponent<Creature>();
-        creature.addActionOnDeath(createSoul);
+        creature.addActionOnDeath(dropSoul);
     }
 
-    private void createSoul()
+    private void dropSoul()
     {
         Collectable soul = Instantiate(soulPrefab, transform.position, Quaternion.identity) as Collectable;
         Heal heal = soul.GetComponent<Heal>();
-        heal.value = value;
+        heal.amount = healAmount;
     }
 }
