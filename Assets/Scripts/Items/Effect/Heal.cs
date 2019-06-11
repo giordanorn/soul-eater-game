@@ -6,9 +6,9 @@ using UnityEngine;
 public class Heal : Effect
 {
     /// <summary>
-    /// The value of Health to be restored.
+    /// The amount of Health to be restored.
     /// </summary>
-    public float value = 10;
+    public float amount = 10.0f;
     public override void ApplyEffect(Collector collector)
     {
         if (collector.IsCreature())
@@ -17,7 +17,7 @@ public class Heal : Effect
             if (creature.HasHealthReserve())
             {
                 HealthReserve healthReserve = collector.GetComponent<HealthReserve>();
-                healthReserve.Increase(value);
+                healthReserve.Increase(amount);
             }
             else
             {
