@@ -12,6 +12,8 @@ public class PlayerShortAttack : MonoBehaviour
 
     private CircleCollider2D attackCollider;
 
+    private Attacker attacker;
+
     private Vector2 downOffset;
     private Vector2 leftOffset;
     private Vector2 upOffset;
@@ -24,7 +26,8 @@ public class PlayerShortAttack : MonoBehaviour
     {
         attackCollider = GetComponent<CircleCollider2D>();
         attackCollider.isTrigger = true;
-        //attackCollider.enabled = false;
+        
+        attacker = GetComponentInParent<Attacker>();
 
         downOffset = new Vector2(0, -range);
         leftOffset = new Vector2(-range, 0);
@@ -76,9 +79,12 @@ public class PlayerShortAttack : MonoBehaviour
         duration.StartCooldown(attackDuration);
     }
 
-    void OnTriggerStay2D(Collider2D collider)
+    void OnTriggerEnter2D(Collider2D collider)
     {
-        Debug.Log("opa fion");
-        Destroy(collider.gameObject);
+        Creature target = collider.GetComponent<Creature>();
+        if (target != null)
+        {
+            attacker.Hit(target);
+        }
     }
 }

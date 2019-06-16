@@ -5,8 +5,8 @@ public class Attacker : MonoBehaviour
 {
     public int strengh = 0;
 
-    public void Hit(Creature target, float damage)
+    public void Hit(Creature target)
     {
-        target.TakeDamage(damage);
+        target.TakeDamage(strengh);
     }
 }
