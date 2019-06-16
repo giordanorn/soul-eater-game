@@ -23,6 +23,7 @@ public class PlayerShortAttack : MonoBehaviour
     void Start()
     {
         attackCollider = GetComponent<CircleCollider2D>();
+        attackCollider.isTrigger = true;
         //attackCollider.enabled = false;
 
         downOffset = new Vector2(0, -range);
@@ -41,11 +42,10 @@ public class PlayerShortAttack : MonoBehaviour
         {
             PerformShortAttack();
             cooldown.StartCooldown(attackCooldown);
-            Debug.Log("Is trigger? " + GetComponent<CircleCollider2D>().isTrigger);
         }
         if (!duration.InCooldown())
         {
-            //attackCollider.enabled = false;
+            attackCollider.enabled = false;
         }
     }
 
@@ -76,7 +76,7 @@ public class PlayerShortAttack : MonoBehaviour
         duration.StartCooldown(attackDuration);
     }
 
-    void OnTriggerEnter(Collider collider)
+    void OnTriggerStay2D(Collider2D collider)
     {
         Debug.Log("opa fion");
         Destroy(collider.gameObject);
