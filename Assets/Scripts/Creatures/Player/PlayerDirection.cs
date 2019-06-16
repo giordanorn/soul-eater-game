@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -37,22 +37,22 @@ public class PlayerDirection : MonoBehaviour
     {
         if (Input.GetKeyDown(downKey))
         {
-            directionalSprite.Direction = SpriteDirectionController.Directions.Down;
+            directionalSprite.LookDown();
         }
 
         if (Input.GetKeyDown(leftKey))
         {
-            directionalSprite.Direction = SpriteDirectionController.Directions.Left;
+            directionalSprite.LookLeft();
         }
 
         if (Input.GetKeyDown(upKey))
         {
-            directionalSprite.Direction = SpriteDirectionController.Directions.Up;
+            directionalSprite.LookUp();
         }
 
         if (Input.GetKeyDown(rightKey))
         {
-            directionalSprite.Direction = SpriteDirectionController.Directions.Right;
+            directionalSprite.LookRight();
         }
     }
 }

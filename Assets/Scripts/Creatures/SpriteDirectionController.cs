@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 /// <summary>Provides functionality for changing sprite based on the associated direction.</summary>
 [RequireComponent(typeof(SpriteRenderer))]
@@ -72,7 +72,30 @@ public class SpriteDirectionController : MonoBehaviour
             direction = value;
         }
     }
-
+    
+    /// <summary>Set the direction to Up.</summary>
+    public void LookUp()
+    {
+        Direction = Directions.Up;
+    }
+    
+    /// <summary>Set the direction to Left.</summary>
+    public void LookLeft()
+    {
+        Direction = Directions.Left;
+    }
+    
+    /// <summary>Set the direction to Right.</summary>
+    public void LookRight()
+    {
+        Direction = Directions.Right;
+    }
+    
+    /// <summary>Set the direction to Down.</summary>
+    public void LookDown()
+    {
+        Direction = Directions.Down;
+    }
 
     /***** Unity Methods *****/
 
