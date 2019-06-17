@@ -414,6 +414,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 550511336103332054, guid: 7d2ec784c9c372f498270ce4b1501255,
+        type: 3}
+      propertyPath: m_Radius
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7593051643345430184, guid: 7d2ec784c9c372f498270ce4b1501255,
         type: 3}
       propertyPath: m_Enabled
@@ -428,11 +433,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AngularDrag
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7593051643345430187, guid: 7d2ec784c9c372f498270ce4b1501255,
-        type: 3}
-      propertyPath: m_BodyType
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7593051643345430196, guid: 7d2ec784c9c372f498270ce4b1501255,
         type: 3}
@@ -473,11 +473,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7593051643345430198, guid: 7d2ec784c9c372f498270ce4b1501255,
-        type: 3}
-      propertyPath: speed
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7593051643345430199, guid: 7d2ec784c9c372f498270ce4b1501255,
         type: 3}
