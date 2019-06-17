@@ -1,7 +1,11 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Cooldown : MonoBehaviour
 {
+    
+    public UnityEvent onCooldownEnd;
+    
     private float currentCooldown;
 
     /***** API *****/
@@ -32,11 +36,18 @@ public class Cooldown : MonoBehaviour
         currentCooldown = 0.0f;
     }
 
+    void Awake()
+    {
+        onCooldownEnd = new UnityEvent();
+    }
+
     void Update()
     {
         if (InCooldown())
         {
             DiscountCooldown();
+            if (!InCooldown())
+                onCooldownEnd.Invoke();
         }
     }
 }
