@@ -21,6 +21,7 @@ public class PlayerShortAttack : MonoBehaviour
     {
         attackCollider = GetComponent<CircleCollider2D>();
         attackCollider.isTrigger = true;
+        attackCollider.enabled = false;
         
         attacker = GetComponentInParent<Attacker>();
 
