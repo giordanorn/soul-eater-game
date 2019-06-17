@@ -31,10 +31,14 @@ public class PlayerDirection : MonoBehaviour
 
     /***** Unity Methods *****/
 
+    void Awake()
+    {
+        OnDirectionChange = new UnityEventDirection();
+    }
+
     void Start()
     {
         directionController = GetComponent<DirectionController>();
-        OnDirectionChange = new UnityEventDirection();
     }
 
     void Update()
