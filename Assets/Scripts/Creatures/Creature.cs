@@ -47,6 +47,11 @@ public class Creature : MonoBehaviour
         }
     }
 
+    public bool IsAlive()
+    {
+        return HasHealthReserve() && !healthReserve.IsEmpty();
+    }
+
     public void Kill()
     {
         Die();
@@ -78,9 +83,9 @@ public class Creature : MonoBehaviour
         return immunity != null;
     }
 
-    public void addActionOnDeath(UnityAction action)
+    public void addActionOnDeath(UnityAction function)
     {
-        beforeDie.AddListener(action);
+        beforeDie.AddListener(function);
     }
 
     private void Die()
