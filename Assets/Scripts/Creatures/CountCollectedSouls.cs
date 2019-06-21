@@ -7,12 +7,11 @@ public class CountCollectedSouls : MonoBehaviour
 
     private void Start()
     {
-        
+        GetComponent<Collector>().addActionOnSoulCollected(addSoul);
     }
 
-    public void addKill()
+    public void addSoul()
     {
-        Debug.Log("collected");
         ++soulsCollected;
     }
 

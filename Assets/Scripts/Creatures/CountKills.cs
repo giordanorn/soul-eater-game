@@ -12,7 +12,6 @@ public class CountKills : MonoBehaviour
 
     public void addKill()
     {
-        Debug.Log("kill!");
         ++kills;
     }
 
