@@ -21,9 +21,6 @@ public class PlayerDirection : MonoBehaviour
     /// <summary>Key for looking right.</summary>
     public KeyCode rightKey = KeyCode.RightArrow;
 
-    /// <summary>Event which is invoked when player change its direction. Functions which listen to this event receives one parameter of type Direction</summary>
-    public UnityEventDirection OnDirectionChange { private set; get; }
-
     /***** Internal *****/
 
     private DirectionController directionController;
@@ -31,10 +28,7 @@ public class PlayerDirection : MonoBehaviour
 
     /***** Unity Methods *****/
 
-    void Awake()
-    {
-        OnDirectionChange = new UnityEventDirection();
-    }
+
 
     void Start()
     {
@@ -46,25 +40,21 @@ public class PlayerDirection : MonoBehaviour
         if (Input.GetKeyDown(downKey))
         {
             directionController.LookDown();
-            OnDirectionChange.Invoke(Direction.Down);
         }
 
         if (Input.GetKeyDown(leftKey))
         {
             directionController.LookLeft();
-            OnDirectionChange.Invoke(Direction.Left);
         }
 
         if (Input.GetKeyDown(upKey))
         {
             directionController.LookUp();
-            OnDirectionChange.Invoke(Direction.Up);
         }
 
         if (Input.GetKeyDown(rightKey))
         {
             directionController.LookRight();
-            OnDirectionChange.Invoke(Direction.Right);
         }
     }
 }
