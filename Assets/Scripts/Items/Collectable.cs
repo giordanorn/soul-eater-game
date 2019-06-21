@@ -27,7 +27,7 @@ public class Collectable : MonoBehaviour
         Collector collector = col.GetComponent<Collector>();
         if (collector != null)
         {
-            collector.Collect(effects);
+            collector.Collect(effects, tag);
             Destroy(gameObject);
         }
     }
