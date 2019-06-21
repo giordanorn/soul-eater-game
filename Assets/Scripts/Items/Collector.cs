@@ -31,4 +31,12 @@ public class Collector : MonoBehaviour
     {
         return creature != null;
     }
+
+    public void Collect(Effect[] effects)
+    {
+        foreach (Effect effect in effects)
+        {
+            effect.ApplyEffect(gameObject);
+        }
+    }
 }
