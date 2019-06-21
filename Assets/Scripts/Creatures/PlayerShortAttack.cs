@@ -8,11 +8,11 @@ public class PlayerShortAttack : MonoBehaviour
     public float range = 1;
     public float attackDuration = 0.1f;
     //public float attackCooldown = 0.5f;
-    
+
     private CircleCollider2D attackCollider;
 
     private Attacker attacker;
-    private PlayerDirection playerDirection;
+    private DirectionController playerDirection;
 
     private Cooldown duration;
     //private Cooldown  cooldown;
@@ -22,13 +22,13 @@ public class PlayerShortAttack : MonoBehaviour
         attackCollider = GetComponent<CircleCollider2D>();
         attackCollider.isTrigger = true;
         attackCollider.enabled = false;
-        
+
         attacker = GetComponentInParent<Attacker>();
 
         duration = gameObject.AddComponent<Cooldown>();
         duration.onCooldownEnd.AddListener(StopAttack);
 
-        playerDirection = GetComponentInParent<PlayerDirection>();
+        playerDirection = GetComponentInParent<DirectionController>();
         playerDirection.OnDirectionChange.AddListener(PerformAttack);
         // cooldown = gameObject.AddComponent<Cooldown>();
     }
