@@ -12,6 +12,11 @@ public class MapModel : MonoBehaviour
     /// <summary>The number of regions to be created.</summary>
     public int numberOfRegions;
 
+    /// <summary>
+    /// The spawner prefab.
+    /// </summary>
+    public Spawner enemySpawner;
+
 
     /***** Unity Methods *****/
 
@@ -69,6 +74,18 @@ public class MapModel : MonoBehaviour
         }
 
         EqualizeCenterDistances();
+
+        // if there is a spawner, add it to each region
+        if (enemySpawner != null)
+        {
+            foreach (Vector2 center in RegionCenters)
+            {
+                Spawner spawner = Instantiate(enemySpawner, center, Quaternion.identity);
+                spawner.transform.position = center;
+                spawner.MaxSpawnedTotal = mapSize * mapSize / RegionCenters.Count;
+                spawner.MaxSpawnedWave = Mathf.FloorToInt(Mathf.Sqrt(spawner.MaxSpawnedTotal));
+            }
+        }
     }
 
     /// <summary>Gets the center of the region which <paramref name="point"/> belongs to.</summary>
@@ -88,10 +105,9 @@ public class MapModel : MonoBehaviour
         return new Vector2(ModMath.Mod(point.x, mapSize), ModMath.Mod(point.y, mapSize));
     }
 
-
     /***** Internal *****/
 
-    // <summary>List of generated region centers.</summary>
+    /// <summary>List of generated region centers.</summary>
     private List<Vector2> centers = new List<Vector2>();
 
     /// <summary>Equalizes the distances between centers.</summary>
