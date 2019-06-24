@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 8011897058165733649}
   - component: {fileID: 8011897058165733648}
   - component: {fileID: 8011897058165733651}
-  - component: {fileID: 7139004485001386148}
+  - component: {fileID: 5527469737243830284}
   - component: {fileID: 2033678763703342265}
   - component: {fileID: 7625776351070428821}
-  - component: {fileID: 7357617381888629312}
+  - component: {fileID: 7139004485001386148}
+  - component: {fileID: 7503542783989135240}
   - component: {fileID: 7012705420482327692}
-  - component: {fileID: 5527469737243830284}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -107,75 +107,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &7139004485001386148
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8011897058165733650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: add61823692f74b458b271909593630e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelMask:
-    serializedVersion: 2
-    m_Bits: 0
-  moveTime: 0.5
---- !u!114 &2033678763703342265
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8011897058165733650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c2e385abefdd19c3b5c14d17c985eb7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &7625776351070428821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8011897058165733650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10765bb6b48b07bb6b588540e7f80c4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maximumHealth: 25
---- !u!114 &7357617381888629312
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8011897058165733650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cbb9b25fa49a060f82f60802b5db399, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  degeneratePerSecond: 0
---- !u!114 &7012705420482327692
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8011897058165733650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 813fe355ce678054384ed62557fe686e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healAmount: 40
-  soulPrefab: {fileID: 8217191588128641315, guid: 7d9e0fee13e945841a15f52b0e38be70,
-    type: 3}
 --- !u!61 &5527469737243830284
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -202,3 +133,73 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &2033678763703342265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8011897058165733650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c2e385abefdd19c3b5c14d17c985eb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7625776351070428821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8011897058165733650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10765bb6b48b07bb6b588540e7f80c4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maximumHealth: 25
+--- !u!114 &7139004485001386148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8011897058165733650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: add61823692f74b458b271909593630e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelMask:
+    serializedVersion: 2
+    m_Bits: 0
+  moveTime: 0.5
+--- !u!114 &7503542783989135240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8011897058165733650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1daa1039fdda44c45a06109ae4ceb439, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  target_tag: Player
+--- !u!114 &7012705420482327692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8011897058165733650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 813fe355ce678054384ed62557fe686e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healAmount: 40
+  soulPrefab: {fileID: 8217191588128641315, guid: 7d9e0fee13e945841a15f52b0e38be70,
+    type: 3}
