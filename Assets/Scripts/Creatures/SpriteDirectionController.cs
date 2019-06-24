@@ -23,38 +23,38 @@ public class SpriteDirectionController : MonoBehaviour
 
     /// <summary>The object's sprite renderer.</summary>
     private SpriteRenderer spriteRenderer;
-    
+
     /// <summary>The object's PlayerDirection component.</summary>
-    private PlayerDirection playerDirection;
+    private DirectionController directionController;
 
     /***** Unity Methods *****/
 
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        playerDirection = GetComponent<PlayerDirection>();
-        playerDirection.OnDirectionChange.AddListener(SetSprite);
+        directionController = GetComponent<DirectionController>();
+        directionController.OnDirectionChange.AddListener(SetSprite);
     }
 
     public void SetSprite(Direction direction)
     {
         switch (direction)
         {
-            case Direction.Down: 
-                spriteRenderer.sprite = downSprite; 
-                break; 
-
-            case Direction.Left: 
-                spriteRenderer.sprite = leftSprite; 
-                break; 
-
-            case Direction.Up: 
-                spriteRenderer.sprite = upSprite; 
-                break; 
-
-            case Direction.Right: 
-                spriteRenderer.sprite = rightSprite; 
+            case Direction.Down:
+                spriteRenderer.sprite = downSprite;
                 break;
-        } 
+
+            case Direction.Left:
+                spriteRenderer.sprite = leftSprite;
+                break;
+
+            case Direction.Up:
+                spriteRenderer.sprite = upSprite;
+                break;
+
+            case Direction.Right:
+                spriteRenderer.sprite = rightSprite;
+                break;
+        }
     }
 }

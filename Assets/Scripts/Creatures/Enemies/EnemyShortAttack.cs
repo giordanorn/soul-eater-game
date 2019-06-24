@@ -1,23 +1,23 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Events;
 
 [RequireComponent(typeof(CircleCollider2D))]
-public class PlayerShortAttack : MonoBehaviour
+public class EnemyShortAttack : MonoBehaviour
 {
     public float range = 1;
     public float attackDuration = 0.1f;
-    //public float attackCooldown = 0.5f;
+    public float attackCooldown = 1f;
 
     private CircleCollider2D attackCollider;
 
     private Attacker attacker;
-    private DirectionController playerDirection;
+    private DirectionController enemyDirection;
 
     private Cooldown duration;
-    //private Cooldown  cooldown;
+    private Cooldown cooldown;
 
+    private bool canAttack = true;
     void Start()
     {
         attackCollider = GetComponent<CircleCollider2D>();
@@ -29,12 +29,14 @@ public class PlayerShortAttack : MonoBehaviour
         duration = gameObject.AddComponent<Cooldown>();
         duration.onCooldownEnd.AddListener(StopAttack);
 
-        playerDirection = GetComponentInParent<DirectionController>();
-        playerDirection.OnDirectionChange.AddListener(PerformAttack);
-        // cooldown = gameObject.AddComponent<Cooldown>();
+        cooldown = gameObject.AddComponent<Cooldown>();
+        cooldown.onCooldownEnd.AddListener(RecoverAttack);
+
+        enemyDirection = GetComponentInParent<DirectionController>();
+        enemyDirection.OnDirectionChange.AddListener(PerformAttack);
     }
 
-    void OnTriggerEnter2D(Collider2D collider)
+    void OnTriggerStay2D(Collider2D collider)
     {
         Creature target = collider.GetComponent<Creature>();
         if (target != null)
@@ -45,9 +47,15 @@ public class PlayerShortAttack : MonoBehaviour
 
     private void PerformAttack(Direction direction)
     {
-        attackCollider.offset = GetOffset(direction);
-        attackCollider.enabled = true;
-        duration.StartCooldown(attackDuration);
+        if (canAttack)
+        {
+            attackCollider.offset = GetOffset(direction);
+            attackCollider.enabled = true;
+            duration.StartCooldown(attackDuration);
+            cooldown.StartCooldown(attackCooldown);
+            canAttack = false;
+        }
+
     }
 
     private Vector2 GetOffset(Direction direction)
@@ -68,5 +76,9 @@ public class PlayerShortAttack : MonoBehaviour
     {
         attackCollider.enabled = false;
         attackCollider.offset = Vector2Int.zero;
+    }
+    public void RecoverAttack()
+    {
+        canAttack = true;
     }
 }
