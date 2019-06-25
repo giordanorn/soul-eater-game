@@ -124,6 +124,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7593051643345430186, guid: 7d2ec784c9c372f498270ce4b1501255,
+        type: 3}
+      propertyPath: maximumHealth
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 7593051643345430196, guid: 7d2ec784c9c372f498270ce4b1501255,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -178,11 +183,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7593051643345430186, guid: 7d2ec784c9c372f498270ce4b1501255,
-        type: 3}
-      propertyPath: maximumHealth
-      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d2ec784c9c372f498270ce4b1501255, type: 3}
@@ -275,7 +275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94a5620416a77f843835f12cea793a0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tile: {fileID: 11400000, guid: 5a0a94f7e4403e88b8bb0e3b8003e0aa, type: 2}
+  tile: {fileID: 11400000, guid: 840963cfc46c9a37ca4b3caccb816dc1, type: 2}
 --- !u!483693784 &751481268
 TilemapRenderer:
   m_ObjectHideFlags: 0

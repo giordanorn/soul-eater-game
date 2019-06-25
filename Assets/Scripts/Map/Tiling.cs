@@ -87,7 +87,7 @@ public class Tiling : MonoBehaviour
                 Vector2Int center = Vector2Int.FloorToInt(mapModel.CenterOf(pos));
                 if (!regionColors.TryGetValue(center, out Color color))
                 {
-                    color = Color.HSVToRGB(Random.value, 0.15f, 1f);
+                    color = Color.HSVToRGB(Random.value, 0.5f, 1f);
                     regionColors.Add(center, color);
                 }
 

@@ -47,5 +47,5 @@ MonoBehaviour:
   - {fileID: 2033678763703342265, guid: adca1c4ab1563a2468a7652ffbf5379d, type: 3}
   - {fileID: 5436702210505171728, guid: 66d964f096525f37ab03f08224911dd1, type: 3}
   maxSpawnedTotal: 100
-  maxSpawnedWave: 15
-  spawnCooldown: 1
+  maxSpawnedWave: 25
+  spawnCooldown: 0.5

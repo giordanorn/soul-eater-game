@@ -83,6 +83,7 @@ public class CreatureSpawner : MonoBehaviour
             {
                 chunkController = value;
                 chunkController.onSwappingChunks.AddListener(OnSwappingChunks);
+                OnSwappingChunks(chunkController.ActiveChunks, new RectInt[] { });
             }
         }
     }
@@ -136,7 +137,7 @@ public class CreatureSpawner : MonoBehaviour
         do
         {
             point = transform.position + (Vector3)Random.insideUnitCircle * radius;
-            radius /= 1.25f;
+            radius /= 5f;
         }
         while (!Map.SameRegion(point, transform.position));
 

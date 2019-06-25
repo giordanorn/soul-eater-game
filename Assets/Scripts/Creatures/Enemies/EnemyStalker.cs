@@ -19,7 +19,7 @@ public class EnemyStalker : EnemyRandomGridMovement
     public override Vector3 ChooseMove()
     {
         MapModel map = creature.Map;
-        if (map != null)
+        if (map != null && target != null && target.activeSelf)
         {
             Vector3 delta = ModMath.MinDeltaVector(transform.position, target.transform.position, map.MapSize);
             if (delta.sqrMagnitude < stalkRadius * stalkRadius)

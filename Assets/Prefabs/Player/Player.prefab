@@ -111,7 +111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 0.5
   cost: 10
-  velocity: 1.05
+  velocity: 1.2
   attackDuration: 1
   attackCooldown: 2
   attackKey: 32
