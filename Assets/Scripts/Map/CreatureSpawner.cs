@@ -1,12 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class CreatureSpawner : MonoBehaviour
 {
     /***** Unity Parameters *****/
 
-    /// <summary>The prefab to be spawned.</summary>
-    public Creature prefab;
+    /// <summary>The prefabs to be spawned.</summary>
+    public Creature[] prefabs;
 
     /// <summary>Gets or sets the maximum number of objects to be spawned in total.</summary>
     /// <value>The maximum number of objects to be spawned in total.</value>
@@ -55,6 +57,17 @@ public class CreatureSpawner : MonoBehaviour
 
 
     /***** API *****/
+
+    /// <summary>
+    /// Gets or sets the function to select a creature
+    /// </summary>
+    /// <value>The function to select a creature.</value>
+    public Func<Creature[], Creature> SelectCreature { get; set; } =
+        (prefabs) =>
+        {
+            float t = Random.Range(0f, prefabs.Length-1);
+            return prefabs[Mathf.RoundToInt(t * t)];
+        };
 
     /// <summary>
     /// Sets the chunk controller.
@@ -112,9 +125,10 @@ public class CreatureSpawner : MonoBehaviour
     /// <summary>Spawn an instance of the prefab.</summary>
     private void Spawn()
     {
-        Creature creature = Instantiate(prefab, transform);
-        creature.addActionOnDeath(() => Despawn(creature));
+        Creature selected = SelectCreature(prefabs);
+        Creature creature = Instantiate(selected, transform);
         creature.Map = Map;
+        creature.addActionOnDeath(() => Despawn(creature));
         spawned.Add(creature);
 
         Vector2 point;
