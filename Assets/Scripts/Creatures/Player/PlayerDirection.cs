@@ -1,9 +1,10 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>Controls Player direction based on input.</summary>
-[RequireComponent(typeof(SpriteDirectionController))]
+[RequireComponent(typeof(DirectionController))]
 public class PlayerDirection : MonoBehaviour
 {
     /***** Unity Parameters *****/
@@ -20,39 +21,40 @@ public class PlayerDirection : MonoBehaviour
     /// <summary>Key for looking right.</summary>
     public KeyCode rightKey = KeyCode.RightArrow;
 
-
     /***** Internal *****/
 
-    private SpriteDirectionController directionalSprite;
+    private DirectionController directionController;
 
 
     /***** Unity Methods *****/
 
+
+
     void Start()
     {
-        directionalSprite = GetComponent<SpriteDirectionController>();
+        directionController = GetComponent<DirectionController>();
     }
 
     void Update()
     {
         if (Input.GetKeyDown(downKey))
         {
-            directionalSprite.Direction = SpriteDirectionController.Directions.Down;
+            directionController.LookDown();
         }
 
         if (Input.GetKeyDown(leftKey))
         {
-            directionalSprite.Direction = SpriteDirectionController.Directions.Left;
+            directionController.LookLeft();
         }
 
         if (Input.GetKeyDown(upKey))
         {
-            directionalSprite.Direction = SpriteDirectionController.Directions.Up;
+            directionController.LookUp();
         }
 
         if (Input.GetKeyDown(rightKey))
         {
-            directionalSprite.Direction = SpriteDirectionController.Directions.Right;
+            directionController.LookRight();
         }
     }
 }
