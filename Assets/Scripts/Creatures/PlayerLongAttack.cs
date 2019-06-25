@@ -14,7 +14,7 @@ public class PlayerLongAttack : MonoBehaviour
     private SpriteRenderer attackSprite;
     private Attacker attacker;
     private Creature creature;
-    private PlayerDirection playerDirection;
+    private DirectionController directionController;
     private Cooldown duration;
     private Cooldown cooldown;
     private bool canAttack = true;
@@ -43,8 +43,8 @@ public class PlayerLongAttack : MonoBehaviour
         cooldown = gameObject.AddComponent<Cooldown>();
         duration.onCooldownEnd.AddListener(RecoverAttack);
 
-        playerDirection = GetComponentInParent<PlayerDirection>();
-        playerDirection.OnDirectionChange.AddListener(changeAttackDirection);
+        directionController = GetComponentInParent<DirectionController>();
+        directionController.OnDirectionChange.AddListener(changeAttackDirection);
     }
 
     void Update()
