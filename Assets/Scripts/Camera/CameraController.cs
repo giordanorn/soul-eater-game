@@ -5,7 +5,7 @@ public class CameraController : MonoBehaviour
     /***** Unity Parameters *****/
 
     /// <summary>The object to follow.</summary>
-    public GameObject target;
+    private GameObject target;
 
 
     /***** Private Fields *****/
@@ -18,6 +18,7 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
+        target = GameObject.FindGameObjectWithTag("Player");
         offset = transform.position - target.transform.position;
     }
 
