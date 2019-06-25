@@ -90396,7 +90396,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapSize: 100
   numberOfRegions: 15
-  enemySpawner: {fileID: 4968975075931130861, guid: c2d2e090da6691408b16048f6d47ad6f,
+  enemySpawner: {fileID: 3300926863667714529, guid: c2d2e090da6691408b16048f6d47ad6f,
     type: 3}
 --- !u!114 &751481271
 MonoBehaviour:
