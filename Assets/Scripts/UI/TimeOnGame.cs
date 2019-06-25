@@ -3,8 +3,13 @@ using UnityEngine.UI;
 
 public class TimeOnGame : MonoBehaviour
 {
-    public PlayerStatistics playerStatistics;
+    private PlayerStatistics playerStatistics;
     public Text timeSurvived;
+
+    void Start ()
+    {
+        playerStatistics = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatistics>();
+    }
 
     void Update()
     {
