@@ -39,7 +39,7 @@ public class EnemyShortAttack : MonoBehaviour
     void OnTriggerStay2D(Collider2D collider)
     {
         Creature target = collider.GetComponent<Creature>();
-        if (target != null)
+        if (target != null && target.CompareTag("Player"))
         {
             attacker.Hit(target);
         }
