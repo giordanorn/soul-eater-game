@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class MapModel : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class MapModel : MonoBehaviour
     /// <summary>
     /// The spawner prefab.
     /// </summary>
-    public Spawner enemySpawner;
+    public CreatureSpawner enemySpawner;
 
 
     /***** Unity Methods *****/
@@ -34,7 +35,7 @@ public class MapModel : MonoBehaviour
     /// <summary>Draw artifacts on the screen for in-editor partition visualization.</summary>
     void OnDrawGizmos()
     {
-        foreach (Vector2 p in centers)
+        foreach (Vector2 p in Centers)
         {
             Color prev = Gizmos.color;
             Gizmos.color = Color.white;
@@ -52,15 +53,15 @@ public class MapModel : MonoBehaviour
     /// <value>The size of the map.</value>
     public Vector2 MapSize => new Vector2(mapSize, mapSize);
 
-    /// <summary>Gets an unmodifiable list of the centers of the regions.</summary>
-    /// <value>The centers of regions.</value>
-    public IReadOnlyList<Vector2> RegionCenters => centers;
+    /// <summary>Gets an unmodifiable list of the enemy spawners.</summary>
+    /// <value>The enemy spawners.</value>
+    public IReadOnlyList<CreatureSpawner> Spawners => spawners;
 
     /// <summary>Generates the centers of the regions.</summary>
     /// <returns>The centers of the regions.</returns>
     public void Partition(int numberOfRegions)
     {
-        centers.Clear();
+        Centers.Clear();
 
         for (int i = 0; i < numberOfRegions; i++)
         {
@@ -70,7 +71,7 @@ public class MapModel : MonoBehaviour
 
             Vector2 current = new Vector2(x, y);
 
-            centers.Add(current);
+            Centers.Add(current);
         }
 
         EqualizeCenterDistances();
@@ -78,12 +79,12 @@ public class MapModel : MonoBehaviour
         // if there is a spawner, add it to each region
         if (enemySpawner != null)
         {
-            foreach (Vector2 center in RegionCenters)
+            foreach (Vector2 center in Centers)
             {
-                Spawner spawner = Instantiate(enemySpawner, center, Quaternion.identity);
+                CreatureSpawner spawner = Instantiate(enemySpawner, center, Quaternion.identity);
+                spawner.Map = this;
                 spawner.transform.position = center;
-                spawner.MaxSpawnedTotal = mapSize * mapSize / RegionCenters.Count;
-                spawner.MaxSpawnedWave = Mathf.FloorToInt(Mathf.Sqrt(spawner.MaxSpawnedTotal));
+                spawners.Add(spawner);
             }
         }
     }
@@ -94,7 +95,18 @@ public class MapModel : MonoBehaviour
     public Vector2 CenterOf(Vector2 point)
     {
         Vector2 mapPoint = InMapCoord(point);  
-        return centers.OrderBy(p => ModMath.MinDeltaVector(p, mapPoint, MapSize).sqrMagnitude).First();
+        return Centers.OrderBy(p => ModMath.MinDeltaVector(p, mapPoint, MapSize).sqrMagnitude).First();
+    }
+
+    /// <summary>
+    /// Checks if the two points are in the same region.
+    /// </summary>
+    /// <returns><c>true</c>, if the points are in the same region, <c>false</c> otherwise.</returns>
+    /// <param name="a">Point a.</param>
+    /// <param name="b">Point b.</param>
+    public bool SameRegion(Vector2 a, Vector2 b)
+    {
+        return Vector2Int.FloorToInt(CenterOf(a)) == Vector2Int.FloorToInt(CenterOf(b));
     }
 
     /// <summary>Gets the corresponding point in torus map coordinates.</summary>
@@ -107,14 +119,21 @@ public class MapModel : MonoBehaviour
 
     /***** Internal *****/
 
-    /// <summary>List of generated region centers.</summary>
-    private List<Vector2> centers = new List<Vector2>();
+
+    /// <summary>Gets an unmodifiable list of the centers of the regions.</summary>
+    /// <value>The centers of regions.</value>
+    private List<Vector2> Centers { get; } = new List<Vector2>();
+
+    /// <summary>
+    /// The spawners.
+    /// </summary>
+    private List<CreatureSpawner> spawners = new List<CreatureSpawner>();
 
     /// <summary>Equalizes the distances between centers.</summary>
     private void EqualizeCenterDistances()
     {
         // Shorthand for the size of the centers array.
-        int n = centers.Count;
+        int n = Centers.Count;
 
         // Simulation time step. 
         float t = Time.fixedDeltaTime;
@@ -131,7 +150,7 @@ public class MapModel : MonoBehaviour
                 for (int j = 0; j < n; j++)
                 {
                     // Calculates the distance between the two points.
-                    Vector2 delta = ModMath.MinDeltaVector(centers[i], centers[j], MapSize);
+                    Vector2 delta = ModMath.MinDeltaVector(Centers[i], Centers[j], MapSize);
 
                     // Normalize distance to unit torus.
                     delta.Scale(new Vector2(1f / mapSize, 1f / mapSize));
@@ -151,13 +170,13 @@ public class MapModel : MonoBehaviour
                 // Displacement is proportional to acceleration times t squared:
                 // Δx = v * t = a * t * t
                 // Since t is small, we will use t instead of t^2 to make each step more meaningful.
-                centers[i] += totalRepulsion * t;
+                Centers[i] += totalRepulsion * t;
 
                 // Ensure point remains inside torus.
-                float x = (centers[i].x % mapSize + mapSize) % mapSize;
-                float y = (centers[i].y % mapSize + mapSize) % mapSize;
+                float x = (Centers[i].x % mapSize + mapSize) % mapSize;
+                float y = (Centers[i].y % mapSize + mapSize) % mapSize;
 
-                centers[i] = new Vector2(x, y);
+                Centers[i] = new Vector2(x, y);
             }
         }
     }
