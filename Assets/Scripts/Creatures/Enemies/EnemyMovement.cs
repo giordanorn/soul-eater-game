@@ -25,7 +25,7 @@ public abstract class EnemyMovement : MonoBehaviour
         if (!IsMoving)
         {
             Vector3Int direction = ChooseMove();
-            // LastMove = direction;
+            LastMove = direction;
 
             if (CanMove(direction))
             {
@@ -39,7 +39,7 @@ public abstract class EnemyMovement : MonoBehaviour
 
     /// <summary>The last move performed.</summary>
     /// <value>The last move.</value>
-    /// public Vector3Int LastMove { get; private set; } = Vector3Int.zero;
+    public Vector3Int LastMove { get; private set; } = Vector3Int.zero;
 
     /// <summary>Whether this entity or not.</summary>
     /// <value>true if moving, else false.</value>

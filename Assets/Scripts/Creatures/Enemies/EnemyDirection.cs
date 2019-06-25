@@ -11,7 +11,7 @@ public class EnemyDirection : MonoBehaviour
     /***** Internal *****/
 
     private DirectionController directionController;
-    private EnemyRandomMovement enemyRandomMovement;
+    private EnemyRandomGridMovement enemyRandomMovement;
 
 
     /***** Unity Methods *****/
@@ -20,7 +20,7 @@ public class EnemyDirection : MonoBehaviour
 
     void Start()
     {
-        enemyRandomMovement = GetComponent<EnemyRandomMovement>();
+        enemyRandomMovement = GetComponent<EnemyRandomGridMovement>();
         directionController = GetComponent<DirectionController>();
     }
 
