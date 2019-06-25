@@ -3,6 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(MapModel))]
 public class ChunkController : MonoBehaviour
 {
     /***** Unity Parameters *****/
@@ -36,7 +37,14 @@ public class ChunkController : MonoBehaviour
                             chunkComparer
                             );
 
-        centralChunk = ChunkContaining(pivot.transform.position);
+        centralChunk = GlobalContainingChunk(pivot.transform.position);
+
+        foreach (CreatureSpawner spawner in mapModel.Spawners)
+        {
+            spawner.ChunkController = this;
+        }
+
+        onSwappingChunks.Invoke(null, null);
     }
 
 
@@ -61,7 +69,7 @@ public class ChunkController : MonoBehaviour
             activeChunks.UnionWith(added);
 
             // Update central chunk.
-            centralChunk = ChunkContaining(pivot.transform.position);
+            centralChunk = GlobalContainingChunk(pivot.transform.position);
 
             // Fire event.
             onSwappingChunks.Invoke(added, removed);
@@ -78,15 +86,32 @@ public class ChunkController : MonoBehaviour
     /// <summary>Event that fires when swapping chunks.</summary>
     public readonly UnityEvent<IEnumerable<RectInt>, IEnumerable<RectInt>> onSwappingChunks = new SwappingChunksEvent();
 
-    /// <summary>Checks if <paramref name="position"/> is in an active chunk.</summary>
-    /// <returns><c>true</c>, if is in an active chunk, <c>false</c> otherwise.</returns>
+    /// <summary>
+    /// Checks if <paramref name="position"/> is in an active chunk, in which 
+    /// case <paramref name="activePosition"/> will be the corresponding position
+    /// in the active chunk.
+    /// </summary>
+    /// <returns><c>true</c>, if <paramref name="position"/> is in an active chunk, <c>false</c> otherwise.</returns>
     /// <param name="position">Position.</param>
-    public bool IsInActiveChunk(Vector2 position)
+    /// <param name="activePosition">Corresponding position in the active chunk.</param>
+    public bool IsInActiveChunk(Vector2 position, out Vector2 activePosition)
     {
         // Get reduced corresponding coordinate inside map bounds.
         Vector2 mapPos = mapModel.InMapCoord(position);
 
-        return activeChunks.Contains(ChunkContaining(mapPos));
+        // Checks if any of the currently active chunks contains the position
+        RectInt chunk = GlobalContainingChunk(position);
+        foreach (RectInt rect in activeChunks)
+        {
+            if (chunkComparer.Equals(rect, chunk))
+            {
+                activePosition = position - chunk.min + rect.min;
+                return true;
+            }
+        }
+
+        activePosition = default;
+        return false;
     }
 
 
@@ -108,11 +133,11 @@ public class ChunkController : MonoBehaviour
     private MapModel mapModel;
 
     /// <summary>
-    /// Gets the chunk containing <paramref name="position"/>.
+    /// Gets the world space chunk containing <paramref name="position"/>.
     /// </summary>
-    /// <returns>The chunk containing <paramref name="position"/>.</returns>
+    /// <returns>The world space chunk containing <paramref name="position"/>.</returns>
     /// <param name="position">Position.</param>
-    private RectInt ChunkContaining(Vector2 position)
+    private RectInt GlobalContainingChunk(Vector2 position)
     {
         int i = Mathf.FloorToInt(position.x / chunkSize);
         int j = Mathf.FloorToInt(position.y / chunkSize);
@@ -145,7 +170,7 @@ public class ChunkController : MonoBehaviour
         // Scale and translate the grid, retrieving the required neighbors.
         foreach (Vector2 dir in chunkRepresentants)
         {
-            yield return ChunkContaining(position + chunkSize * dir);
+            yield return GlobalContainingChunk(position + chunkSize * dir);
         }
     }
 }

@@ -2,6 +2,8 @@
 using UnityEngine.Events;
 public class Creature : MonoBehaviour
 {
+    public MapModel Map { get; set; }
+
     private UnityEvent beforeDie;
 
     private HealthReserve healthReserve;

@@ -372,13 +372,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8011897058165733650}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: add61823692f74b458b271909593630e, type: 3}
+  m_Script: {fileID: 11500000, guid: 70bbd883a24b9672583b11a5f82ce119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelMask:
-    serializedVersion: 2
-    m_Bits: 0
-  moveTime: 0.5
+  moveTime: 1
 --- !u!114 &7503542783989135240
 MonoBehaviour:
   m_ObjectHideFlags: 0
