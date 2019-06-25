@@ -3,27 +3,19 @@ using UnityEngine.UI;
 
 public class StatsOnDeath : MonoBehaviour
 {
-    private PlayerStatistics playerStatistics;
-    private Creature player;
-
+    public PlayerStatistics playerStatistics;
     public Text timeSurvived;
     public Text enemies;
     public Text souls;
     public GameObject panel;
+    public Creature player;
 
-    void Start ()
+    void Start()
     {
         panel.SetActive(false);
-
-        GameObject go = GameObject.FindGameObjectWithTag("Player");
-        playerStatistics = go.GetComponent<PlayerStatistics>();
-        player = go.GetComponent<Creature>();
-
         player.addActionOnDeath(showStats);
-
     }
-    void showStats ()
-    {
+    void showStats(){
         panel.SetActive(true);
         timeSurvived.text = playerStatistics.timeAlive.ToString("F2");
         enemies.text = playerStatistics.kills.ToString();

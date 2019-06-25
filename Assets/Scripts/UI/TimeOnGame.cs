@@ -6,9 +6,18 @@ public class TimeOnGame : MonoBehaviour
     private PlayerStatistics playerStatistics;
     public Text timeSurvived;
 
-    void Start ()
+    void Awake ()
     {
-        playerStatistics = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatistics>();
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (!player)
+        {
+            Debug.Log("lixo 1");
+        }
+        playerStatistics = player.GetComponent<PlayerStatistics>();
+        if (!playerStatistics)
+        {
+            Debug.Log("lixo 2");
+        }
     }
 
     void Update()
