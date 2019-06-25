@@ -50,6 +50,7 @@ public class Tiling : MonoBehaviour
                 if (!regionColors.TryGetValue(center, out Color color))
                 {
                     color = Random.ColorHSV();
+                    color.a = Mathf.Clamp01(1f / (center - pos).sqrMagnitude);
                     regionColors.Add(center, color);
                 }
 
@@ -86,7 +87,7 @@ public class Tiling : MonoBehaviour
                 Vector2Int center = Vector2Int.FloorToInt(mapModel.CenterOf(pos));
                 if (!regionColors.TryGetValue(center, out Color color))
                 {
-                    color = Random.ColorHSV();
+                    color = Color.HSVToRGB(Random.value, 0.15f, 1f);
                     regionColors.Add(center, color);
                 }
 
