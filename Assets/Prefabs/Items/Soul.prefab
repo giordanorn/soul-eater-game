@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8217191588128641315}
   m_Layer: 0
   m_Name: Soul
-  m_TagString: Untagged
+  m_TagString: Soul
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5bc4478576fe6240be31ccbb5bd2b35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aplicableTo: []
   amount: 10
 --- !u!114 &8217191588128641315
 MonoBehaviour:

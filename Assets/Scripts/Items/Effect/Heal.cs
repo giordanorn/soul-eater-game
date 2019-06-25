@@ -9,20 +9,13 @@ public class Heal : Effect
     /// The amount of Health to be restored.
     /// </summary>
     public float amount = 10.0f;
-    public override void ApplyEffect(Collector collector)
+    public override void ApplyEffect(GameObject gameObject)
     {
-        if (collector.IsCreature())
+        Creature creature = gameObject.GetComponent<Creature>();
+        if (creature != null)
         {
-            Creature creature = collector.GetComponent<Creature>();
-            if (creature.HasHealthReserve())
-            {
-                HealthReserve healthReserve = collector.GetComponent<HealthReserve>();
-                healthReserve.Increase(amount);
-            }
-            else
-            {
-                Debug.LogWarning("Can't heal. HealthReserve is missing!");
-            }
+            HealthReserve healthReserve = creature.GetComponent<HealthReserve>();
+            healthReserve.Increase(amount);
         }
         else
         {

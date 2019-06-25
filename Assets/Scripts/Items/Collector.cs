@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 /// Behaviour to collect Collectibles and if a be a Creature, inform this fact.
@@ -6,6 +7,9 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class Collector : MonoBehaviour
 {
+    private UnityEvent soulCollected;
+
+
     /// <summary>
     /// The Collider2D that GameObject needs to know when to collect a Collectible.
     /// </summary>
@@ -18,6 +22,7 @@ public class Collector : MonoBehaviour
 
     private void Awake()
     {
+        soulCollected = new UnityEvent();
         coll2d = GetComponent<Collider2D>();
         creature = GetComponent<Creature>();
         coll2d.isTrigger = false;
@@ -30,5 +35,22 @@ public class Collector : MonoBehaviour
     public bool IsCreature()
     {
         return creature != null;
+    }
+
+    public void addActionOnSoulCollected(UnityAction function)
+    {
+        soulCollected.AddListener(function);
+    }
+
+    public void Collect(Effect[] effects, string tag)
+    {
+        if (tag == "Soul")
+        {
+            soulCollected.Invoke();
+        }
+        foreach (Effect effect in effects)
+        {
+            effect.ApplyEffect(gameObject);
+        }
     }
 }
