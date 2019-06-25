@@ -10,20 +10,39 @@ public class EnemyStalker : EnemyRandomGridMovement
     /// <summary>
     /// The target to be stalked.
     /// </summary>
-    public GameObject target;
+    private GameObject target;
 
     /// <summary>
     /// Chooses the move to be performed.
     /// </summary>
     /// <returns>The move to be performed.</returns>
-    public override Vector3Int ChooseMove()
+    public override Vector3 ChooseMove()
     {
-        Vector3 delta = target.transform.position - transform.position;
-        if (delta.sqrMagnitude < stalkRadius * stalkRadius)
+        MapModel map = creature.Map;
+        if (map != null)
         {
-            return Vector3Int.FloorToInt(delta.normalized);
+            Vector3 delta = ModMath.MinDeltaVector(transform.position, target.transform.position, map.MapSize);
+            if (delta.sqrMagnitude < stalkRadius * stalkRadius)
+            {
+                return delta;
+            }
         }
 
         return base.ChooseMove();
+    }
+
+    void Start()
+    {
+        target = GameObject.FindWithTag("Player");
+    }
+
+    void OnDrawGizmos()
+    {
+        MapModel map = creature.Map;
+        if (map != null)
+        {
+            Vector3 delta = ModMath.MinDeltaVector(transform.position, target.transform.position, map.MapSize);
+            Gizmos.DrawLine(transform.position, transform.position + delta);
+        }
     }
 }
