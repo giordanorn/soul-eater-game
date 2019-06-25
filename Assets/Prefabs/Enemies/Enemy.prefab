@@ -214,13 +214,13 @@ GameObject:
   - component: {fileID: 5527469737243830284}
   - component: {fileID: 2033678763703342265}
   - component: {fileID: 7625776351070428821}
-  - component: {fileID: 7139004485001386148}
   - component: {fileID: 7503542783989135240}
   - component: {fileID: 7012705420482327692}
   - component: {fileID: 2903372276386571389}
   - component: {fileID: 3523792190442141644}
   - component: {fileID: 1276379241815250389}
   - component: {fileID: 6827622208714476118}
+  - component: {fileID: 4414984563523582927}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -281,7 +281,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: c01d7986c3e38b42388578f86dab3f56, type: 3}
-  m_Color: {r: 1, g: 0, b: 0.11284256, a: 1}
+  m_Color: {r: 0.1673193, g: 0.5452565, b: 0.8867924, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -363,19 +363,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maximumHealth: 25
---- !u!114 &7139004485001386148
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8011897058165733650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70bbd883a24b9672583b11a5f82ce119, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveTime: 1
 --- !u!114 &7503542783989135240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -459,3 +446,16 @@ MonoBehaviour:
   leftSprite: {fileID: 21300000, guid: 5d81a33b059969651809063e1f3adbb1, type: 3}
   upSprite: {fileID: 21300000, guid: 329e7e4e7ca813b9aa692682a053409c, type: 3}
   rightSprite: {fileID: 21300000, guid: 3ece2287ea6ac9a94afc99d7d494dcb8, type: 3}
+--- !u!114 &4414984563523582927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8011897058165733650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70bbd883a24b9672583b11a5f82ce119, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveTime: 0.5

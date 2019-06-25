@@ -12,7 +12,7 @@ public abstract class EnemyMovement : MonoBehaviour
 
     /***** Unity Methods *****/
 
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0.0f;
@@ -20,16 +20,32 @@ public abstract class EnemyMovement : MonoBehaviour
         creature = GetComponent<Creature>();
     }
 
+
+    private float counter = 0f;
+    private Vector3 direction;
+
     void FixedUpdate()
     {
         if (!IsMoving)
         {
-            Vector3Int direction = ChooseMove();
+            direction = ChooseMove();
             LastMove = direction;
 
+            if (direction.magnitude > float.Epsilon)
+                IsMoving = true;
+        }
+        else
+        {
             if (CanMove(direction))
             {
-                StartCoroutine(SmoothMovement(Vector3Int.FloorToInt(transform.position + direction)));
+                transform.position += direction * Time.fixedDeltaTime;
+            }
+
+            counter += Time.fixedDeltaTime;
+            if (counter >= 1f)
+            {
+                IsMoving = false;
+                counter = 0f;
             }
         }
     }
@@ -39,7 +55,7 @@ public abstract class EnemyMovement : MonoBehaviour
 
     /// <summary>The last move performed.</summary>
     /// <value>The last move.</value>
-    public Vector3Int LastMove { get; private set; } = Vector3Int.zero;
+    public Vector3 LastMove { get; private set; } = Vector3.zero;
 
     /// <summary>Whether this entity or not.</summary>
     /// <value>true if moving, else false.</value>
@@ -47,13 +63,16 @@ public abstract class EnemyMovement : MonoBehaviour
 
     /// <summary>Chooses the move to be performed.</summary>
     /// <returns>The chosen move.</returns>
-    public abstract Vector3Int ChooseMove();
+    public abstract Vector3 ChooseMove();
 
     /// <summary>Checks whether this entity can move along <paramref name="direction"/>.</summary>
     /// <returns><c>true</c>, if it can move, <c>false</c> otherwise.</returns>
     /// <param name="direction">The direction to move.</param>
     public bool CanMove(Vector3 direction)
     {
+        if (creature.Map == null)
+            return false;
+
         Vector3 end = transform.position + direction;
         return creature.Map.SameRegion(end, transform.position);
     }
@@ -73,8 +92,9 @@ public abstract class EnemyMovement : MonoBehaviour
     private Rigidbody2D rb;
 
     /// <summary>The creature component.</summary>
-    private Creature creature;
+    protected Creature creature;
 
+    /*
     /// <summary>
     /// Coroutine to execute a smooth movement from current position to <paramref name="end"/>.
     /// </summary>
@@ -112,6 +132,7 @@ public abstract class EnemyMovement : MonoBehaviour
 
         IsMoving = false;
     }
+    */
 
     void OnDrawGizmos()
     {

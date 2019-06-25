@@ -1,0 +1,122 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &2130584246807184040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4063907369103511227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8260e14c5623cbeaca532e9752a8f8e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveTime: 0.5
+  stalkRadius: 10
+--- !u!1001 &6289874827376785321
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8011897058165733650, guid: adca1c4ab1563a2468a7652ffbf5379d,
+        type: 3}
+      propertyPath: m_Name
+      value: Aggressive Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8011897058165733649, guid: adca1c4ab1563a2468a7652ffbf5379d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8011897058165733649, guid: adca1c4ab1563a2468a7652ffbf5379d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8011897058165733649, guid: adca1c4ab1563a2468a7652ffbf5379d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8011897058165733649, guid: adca1c4ab1563a2468a7652ffbf5379d,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8011897058165733649, guid: adca1c4ab1563a2468a7652ffbf5379d,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8011897058165733649, guid: adca1c4ab1563a2468a7652ffbf5379d,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8011897058165733649, guid: adca1c4ab1563a2468a7652ffbf5379d,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8011897058165733649, guid: adca1c4ab1563a2468a7652ffbf5379d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8011897058165733649, guid: adca1c4ab1563a2468a7652ffbf5379d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8011897058165733649, guid: adca1c4ab1563a2468a7652ffbf5379d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8011897058165733649, guid: adca1c4ab1563a2468a7652ffbf5379d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8011897058165733648, guid: adca1c4ab1563a2468a7652ffbf5379d,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.7264151
+      objectReference: {fileID: 0}
+    - target: {fileID: 8011897058165733648, guid: adca1c4ab1563a2468a7652ffbf5379d,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.24167077
+      objectReference: {fileID: 0}
+    - target: {fileID: 8011897058165733648, guid: adca1c4ab1563a2468a7652ffbf5379d,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.18503027
+      objectReference: {fileID: 0}
+    - target: {fileID: 7625776351070428821, guid: adca1c4ab1563a2468a7652ffbf5379d,
+        type: 3}
+      propertyPath: maximumHealth
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7503542783989135240, guid: adca1c4ab1563a2468a7652ffbf5379d,
+        type: 3}
+      propertyPath: damage
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2903372276386571389, guid: adca1c4ab1563a2468a7652ffbf5379d,
+        type: 3}
+      propertyPath: strengh
+      value: 10
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 4414984563523582927, guid: adca1c4ab1563a2468a7652ffbf5379d, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: adca1c4ab1563a2468a7652ffbf5379d, type: 3}
+--- !u!1 &4063907369103511227 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8011897058165733650, guid: adca1c4ab1563a2468a7652ffbf5379d,
+    type: 3}
+  m_PrefabInstance: {fileID: 6289874827376785321}
+  m_PrefabAsset: {fileID: 0}
